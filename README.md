@@ -20,9 +20,8 @@ Higher-res image: https://raw.githubusercontent.com/Adaptech/fullmoonplumbing/ma
 The Plumber List "legacy system" is done in Google Sheets, including the API which makes "PlumberCreated" and "PlumberUpdated" events
 available to the Full Moon Plumbing scheduling service. 
 
-> It is a tongue-in-cheek attempt to show that we are overcomplicating eventsourcing.
-
-> ... and we are spending way too much time on low-value CRUD.
+> It is a tongue-in-cheek attempt to show that we are overcomplicating 
+> eventsourcing and spending way too much time on low-value CRUD.
 
 ## Getting Started
 
