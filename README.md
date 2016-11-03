@@ -4,6 +4,8 @@ Full Moon Plumbing is a sample application we designed and partly implemented fo
 
 As usual in the first session, we did an introduction to event sourcing, CQRS and domain driven design followed by an event storming:
 
+Higher-res image: https://raw.githubusercontent.com/Adaptech/fullmoonplumbing/master/FullMoonPlumbingEventStorm.png
+
 ![Full Moon Plumbing Eventstorm](FullMoonPlumbingEventStorm.png)
 
 (About the Aggregator pattern used in the context map: http://www.enterpriseintegrationpatterns.com/patterns/messaging/Aggregator.html )
