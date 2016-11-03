@@ -1,0 +1,25 @@
+{
+  "name": "fullmoonplumbing",
+  "version": "1.0.0",
+  "description": "Opensource scheduler for plumbing businesses",
+  "main": "src/scheduler/plumberListImporter.js",
+  "dependencies": {
+    "eventstore-node": "latest",
+    "request": "latest",
+    "nodeunit": "latest",
+    "uuid": "latest"
+  },
+  "scripts": {
+    "test": "nodeunit"
+  },
+  "keywords": [
+    "sr&ed",
+    "scientific",
+    "research",
+    "experimental",
+    "development"
+  ],
+  "author": "Adaptech Solutions",
+  "license": "UNLICENSED",
+  "private": true
+}
