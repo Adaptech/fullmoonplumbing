@@ -54,6 +54,5 @@ previously downloaded.
 
 For example: https://docs.google.com/spreadsheets/d/1DDpscPOD_ey9bAT6W7weGIPMiejOsKgY1s5v12oemaU/pubhtml 
 
-> The "API" and the Plumber List Website are public because Full Moon Plumbing is a Maximum Transparency Business. 
+> The "API" and the Plumber List Website are public because Full Moon Plumbing is more than merely fictional. It is a Maximum Transparency Business. 
 
-Good luck with that.
