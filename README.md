@@ -35,7 +35,7 @@ Try editing some Plumber info.
 ### Exposing the Plumber List "API"
 
 1. In the Google Sheet, go to "File -> Publish to the web".
-2. Under "LinK", select "Event Log" instead of "Entire Document". Select "Comma-separated values (.csv)" instead of "Web Page".
+2. Under "Link", select "Event Log" instead of "Entire Document". Select "Comma-separated values (.csv)" instead of "Web Page".
 3. Copy the link. 
 
 For an example, see https://docs.google.com/spreadsheets/d/1DDpscPOD_ey9bAT6W7weGIPMiejOsKgY1s5v12oemaU/pub?gid=1115265347&single=true&output=csv .
@@ -47,7 +47,7 @@ previously downloaded.
 ### Publishing a read-only "Plumber List Website"
 
 1. In the Google Sheet, go to "File -> Publish to the web".
-2. Under "LinK", select "Entire Document" and "Web Page.
+2. Under "Link", select "Entire Document" and "Web Page.
 3. Copy the link. 
 
 For example: https://docs.google.com/spreadsheets/d/1DDpscPOD_ey9bAT6W7weGIPMiejOsKgY1s5v12oemaU/pubhtml 
