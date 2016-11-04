@@ -16,7 +16,7 @@ function onEdit(e){
   //TODO: Field validations.
 
   var sheet = e.source;
-  var sourceSheet = sheet.getSheets()[0];
+  var sourceSheet = sheet.getActiveSheet();
   var sourceSheetName = sourceSheet.getName(); 
   Logger.log("sourceSheetName: " + sourceSheetName);
   
@@ -25,7 +25,7 @@ function onEdit(e){
   Logger.log("propertyName: " + propertyName);
     
   // Determine if the change needs logging:
-  var singleCellEdited =  e.range.getWidth() === 1 && e.range.getHeight() === 1;
+  var singleCellEdited = e.range.getWidth() === 1 && e.range.getHeight() === 1;
   var propertyNameFoundInRow1 = propertyName !== "";
   var rowIndex = e.range.getRowIndex();
   var notEditingPropertyNameCell = rowIndex > 1;
@@ -57,4 +57,3 @@ function onEdit(e){
     Logger.log(eventType + " event logged.");
   }
 }
-
