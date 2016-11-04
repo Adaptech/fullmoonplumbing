@@ -33,21 +33,6 @@ function onEdit(e){
   // (The column heading in the first row of the sheet is used as the property name, e.g. the "Lastname" in C1 on the "Plumber" sheet is the lastname of a plumber.)
   var propertyName = sourceSheet.getRange(1, columnIndex).getValue();
   Logger.log("propertyName: " + propertyName);
-  
-  // Validate mandatory fields:
-  var validationRule = sourceSheet.getRange(2, columnIndex).getValue();
-  var isMandatoryField = validationRule === "mandatory";
-  Logger.log("isMandatoryField: " + isMandatoryField);
-  var editedCell = sourceSheet.getRange(rowIndex, columnIndex);
-  if(isMandatoryField && !newValue) {
-      Logger.log("No event logged: Mandatory field '" + propertyName + "' was empty.");
-      editedCell.setNote(propertyName + " is a required field.");
-      editedCell.setBackgroundRGB(255,204,204);
-      return
-  } else {
-      editedCell.clearNote();
-      editedCell.setBackground("white");
-  }
     
   // Determine if the change needs logging:
   var singleCellEdited =  e.range.getWidth() === 1 && e.range.getHeight() === 1;
@@ -58,8 +43,6 @@ function onEdit(e){
   Logger.log("notEditingPropertyNameCell: " + notEditingPropertyNameCell);
   var notEditingAggregateIdCell = columnIndex > 1;
   Logger.log("notEditingAggregateIdCell: " + notEditingAggregateIdCell);
-  var notEditingValidationRulesCell = rowIndex > 2;
-  Logger.log(" notEditingValidationRulesCell:" + notEditingValidationRulesCell);
   var notTryingToEditEventLogSheet = sourceSheetName !== "Event Log";
   Logger.log(" notTryingToEditEventLogSheet: " + notTryingToEditEventLogSheet);
   
@@ -67,7 +50,6 @@ function onEdit(e){
      && propertyNameFoundInRow1
      && notEditingPropertyNameCell
      && notEditingAggregateIdCell
-     && notEditingValidationRulesCell
      && notTryingToEditEventLogSheet) {
         Logger.log("Logging event ...");
         var aggregateType = sourceSheetName;
@@ -79,11 +61,7 @@ function onEdit(e){
         if(aggregateIdCell.getValue() === "") {
           aggregateId = Utilities.getUuid();
           aggregateIdCell.setValue(aggregateId);
-          var eventType = aggregateType + "Created";
-          
-          // TODO: Give visual indication of mandatory fields?
-          
-          
+          var eventType = aggregateType + "Created";        
         } else {
           var eventType = aggregateType + "Updated";
         } // endif

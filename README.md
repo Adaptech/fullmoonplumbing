@@ -1,16 +1,5 @@
 # Eventsourcing Explored: Full Moon Plumbing
 
-## ON THIS BRANCH: AN EXPERIMENT WITH MANDATORY FIELDS
-
-- It works partially: No mandatory fields are indicated when creating a new Plumber (or Customer) in the Plumber List spreadsheet. 
-- Abandoned the branch because it was starting to feel wrong to not publish an Updated event because the new value was blank (or otherwise invalid).
-
-The potential problem is one of context: The "Plumber List" is supposed to represent a legacy system from which we source events for the new Scheduling service. In the
-context of the legacy, what fields are mandatory and which ones aren't may be different than what it is in the new "Scheduling" context. 
-Hence: The spreadsheet can / should use the built-in data validation any way it likes, but events should still be published onEdit no matter whether a property
-value is considered "valid" or not in the context of the spreadsheet. The subscriber of the events will decide if the value makes sense in it's own context. 
-
-
 _Full Moon Plumbing is a sample application we designed and partly implemented for https://www.meetup.com/DDD-CQRS-ES/events/234682720/_
 
 A fictitious plumbing business needed a way to schedule plumbers. Having a good overview of who's available and who is scheduled for what
