@@ -2,14 +2,21 @@
   "name": "fullmoonplumbing",
   "version": "1.0.0",
   "description": "Opensource scheduler for plumbing businesses",
-  "main": "src/scheduler/plumberListImporter.js",
+  "main": "dist/scheduler/plumberListImporter.js",
   "dependencies": {
     "eventstore-node": "latest",
     "request": "latest",
     "nodeunit": "latest",
-    "uuid": "latest"
+    "uuid": "latest",
+    "es6-promise": "^4.0.5",
+    "isomorphic-fetch": "^2.2.1"  
   },
   "scripts": {
+    "clean": "rm -rf dist",
+    "build": "babel src --out-dir dist",
+    "prestart": "npm run clean && npm run build",
+    "start": "babel-node src/app local",
+    "pretest": "npm run build",
     "test": "nodeunit"
   },
   "keywords": [
@@ -19,6 +26,14 @@
     "experimental",
     "development"
   ],
+
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "sourceMaps": true,
+    "retainLines": true
+  },
   "author": "Adaptech Solutions",
   "license": "UNLICENSED",
   "private": true
