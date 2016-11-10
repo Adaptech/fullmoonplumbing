@@ -39,5 +39,14 @@ module.exports = {
     var plumber = new Plumber();
     test.throws( function() { plumber.execute(new CreatePlumber("134564","Joe", null, 80.0, 100.0)), PlumberRequiredFieldError } ); 
     test.done();
-  }
-};
+  },
+  'Test Update Plumber mandatory firstname': function (test) {
+    var plumber = new Plumber();
+    test.throws( function() { plumber.execute(new UpdatePlumber("134564",null, "Smith", 80.0, 100.0)), PlumberRequiredFieldError } ); 
+    test.done();
+  },
+  'Test Update Plumber mandatory lastName': function (test) {
+    var plumber = new Plumber();
+    test.throws( function() { plumber.execute(new UpdatePlumber("134564","Joe", null, 80.0, 100.0)), PlumberRequiredFieldError } ); 
+    test.done();
+  }};

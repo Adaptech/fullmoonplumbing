@@ -10,8 +10,6 @@ import PlumberHired from '../events/PlumberHired';
 export default class Plumber {
   constructor() {
     this._id = null;
-    this._firstName = null;
-    this._lastName = null;
     this._regularRate = null;
     this._overtimeRate = null;
   }
@@ -23,37 +21,20 @@ export default class Plumber {
     if (evt instanceof PlumberCreated) {
       this._onPlumberCreated(evt);
     }
-    if (evt instanceof PlumberCreated) {
-      this._onPlumberCreated(evt);
-    }
-    if (evt instanceof PlumberUpdated) {
-      this._onPlumberUpdated(evt);
-    }
     if (evt instanceof RateChanged) {
       this._onRateChanged(evt);
     }  }
 
-
   _onPlumberCreated(evt) {
     this._id = evt.plumberId;
-    this._firstName = evt.firstName;
-    this._lastName = evt.lastName;
-  }
-
-  _onPlumberUpdated(evt) {
-    this._id = evt.plumberId;
-    this._firstName = evt.firstName;
-    this._lastName = evt.lastName;
   }
 
   _onRateChanged(evt) {
-    this._id = evt.plumberId;
     this._regularRate = evt.regularRate;
     this._overtimeRate = evt.overtimeRate;
   }
 
   _onPlumberHired(evt) {
-    this._id = evt.plumberId;
     this._regularRate = evt.regularRate;
     this._overtimeRate = evt.overtimeRate;
   }
@@ -90,6 +71,12 @@ export default class Plumber {
   }
 
   _updatePlumber(command) {
+    if(!command.firstName) {
+      throw new PlumberRequiredFieldError('Required field: Firstname missing.')
+    }
+    if(!command.lastName) {
+      throw new PlumberRequiredFieldError('Required field: Lastname missing.')
+    }    
     return new PlumberUpdated(command.plumberId, command.firstName, command.lastName, command.regularRate, command.overtimeRate);
   }
 };
