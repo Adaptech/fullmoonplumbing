@@ -5,7 +5,7 @@ import UpdatePlumber from '../commands/UpdatePlumber';
 import PlumberCreated from '../events/PlumberCreated';
 import PlumberUpdated from '../events/PlumberUpdated';
 import RateChanged from '../events/RateChanged';
-import PlumberHired from '../events/PlumberHired';
+import PlumberIsAvailable from '../events/PlumberIsAvailable';
 
 export default class Plumber {
   constructor() {
@@ -15,8 +15,8 @@ export default class Plumber {
   }
 
   hydrate(evt) {
-    if (evt instanceof PlumberHired) {
-      this._onPlumberHired(evt);
+    if (evt instanceof PlumberIsAvailable) {
+      this._onPlumberIsAvailable(evt);
     } 
     if (evt instanceof PlumberCreated) {
       this._onPlumberCreated(evt);
@@ -34,7 +34,7 @@ export default class Plumber {
     this._overtimeRate = evt.overtimeRate;
   }
 
-  _onPlumberHired(evt) {
+  _onPlumberIsAvailable(evt) {
     this._regularRate = evt.regularRate;
     this._overtimeRate = evt.overtimeRate;
   }
@@ -64,9 +64,10 @@ export default class Plumber {
     result.push(new PlumberCreated(command.plumberId, command.firstName, command.lastName));
 
     if(command.regularRate && command.overtimeRate){
-        result.push(new PlumberHired(command.plumberId, command.regularRate, command.overtimeRate));      
+        if(command.regularRate > 0.0 && command.overtimeRate > 0.0) {
+          result.push(new PlumberIsAvailable(command.plumberId, command.regularRate, command.overtimeRate));      
+        }
     } 
-
     return result;
   }
 
