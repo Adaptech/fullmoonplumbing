@@ -6,4 +6,13 @@ http://src/domain/Plumber.js
 for evaluating business logic outside the CreatePlumber and UpdatePlumber command handlers which check for required fields.
 
 - PlumberRequiredFieldError is part of the domain language.
+
+- Take a look at _updatePlumber(). This is an example of a command potentially publishing more than one event. 
+The reason: "PlumberUpdated" isn't very descriptive. A read model which is interested in (e.g.) rate changes can subscribe
+to "RateChanged" without needing to parse that fact out of a more general "PlumberUpdated" occurrence. Same with PlumberAvailable 
+and PlumberUnavailable - when scheduling, we care when those occurred but we could conceivably ignore (e.g.) name changes.
  
+# Exercise:
+
+- PlumberUpdated events should only happen if the first- or lastname have actually changed. At the moment, they are happening
+regardless whether a change occurred. (To get started, look for '//TODO' in the code.)

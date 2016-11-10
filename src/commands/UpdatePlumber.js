@@ -1,9 +1,9 @@
 export default class UpdatePlumber {
-  constructor(plumberId, firstName, lastName, rate, overtimeRate) {
+  constructor(plumberId, firstName, lastName, regularRate, overtimeRate) {
     this.plumberId = plumberId;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.rate = rate;
+    this.regularRate = regularRate;
     this.overtimeRate = overtimeRate;
   }
 };

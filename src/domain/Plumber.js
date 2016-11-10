@@ -6,6 +6,7 @@ import PlumberCreated from '../events/PlumberCreated';
 import PlumberUpdated from '../events/PlumberUpdated';
 import RateChanged from '../events/RateChanged';
 import PlumberIsAvailable from '../events/PlumberIsAvailable';
+import PlumberIsUnavailable from '../events/PlumberIsUnavailable';
 
 export default class Plumber {
   constructor() {
@@ -14,16 +15,20 @@ export default class Plumber {
     this._overtimeRate = null;
   }
 
-  hydrate(evt) {
-    if (evt instanceof PlumberIsAvailable) {
-      this._onPlumberIsAvailable(evt);
-    } 
-    if (evt instanceof PlumberCreated) {
-      this._onPlumberCreated(evt);
-    }
-    if (evt instanceof RateChanged) {
-      this._onRateChanged(evt);
-    }  }
+  hydrate(events) {
+    for (var index = 0; index < events.length; ++index) {
+      var evt = events[index];
+      if (evt instanceof PlumberIsAvailable) {
+        this._onPlumberIsAvailable(evt);
+      } 
+      if (evt instanceof PlumberCreated) {
+        this._onPlumberCreated(evt);
+      }
+      if (evt instanceof RateChanged) {
+        this._onRateChanged(evt);
+      }
+    };
+  }
 
   _onPlumberCreated(evt) {
     this._id = evt.plumberId;
@@ -77,8 +82,20 @@ export default class Plumber {
     }
     if(!command.lastName) {
       throw new PlumberRequiredFieldError('Required field: Lastname missing.')
-    }    
-    return new PlumberUpdated(command.plumberId, command.firstName, command.lastName, command.regularRate, command.overtimeRate);
+    }
+
+    var result = [];
+    //TODO: Only publish a PlumberUpdated event if the first- or lastname actually changed.
+    result.push(new PlumberUpdated(command.plumberId, command.firstName, command.lastName));
+
+    if(this._regularRate !== command.regularRate || this._overtimeRate !== command.overtimeRate) {
+      result.push(new RateChanged(this._id, command.regularRate, command.overtimeRate));
+    }
+
+    if(command.regularRate === 0.0 || command.overtimeRate === 0.0) {
+      result.push(new PlumberIsUnavailable(this._id, "Missing rate."));
+    }
+    return result;
   }
 };
 
