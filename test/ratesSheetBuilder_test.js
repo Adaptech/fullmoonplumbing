@@ -1,7 +1,7 @@
 var PlumberCreated = require('../dist/events/PlumberCreated').default;
 var RateChanged = require('../dist/events/RateChanged').default;
 var Plumber = require('../dist/domain/Plumber').default;
-var RatesSheetBuilder = require('../dist/readModels/RatesSheetBuilder');
+var ratesheet = require('../dist/readModels/ratesheet');
 var CreatePlumber = require('../dist/commands/CreatePlumber').default;
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
         typeId: previousEvents[i].constructor.name,
         event: previousEvents[i],
       };
-      result = RatesSheetBuilder.reducer(result,eventData);
+      result = ratesheet.reducer(result,eventData);
     }
 
     //Then:

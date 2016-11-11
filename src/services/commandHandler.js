@@ -4,6 +4,10 @@ var esClient = require('eventstore-node');
 
 module.exports = function commandHandlerFactory (esConnection, logger) {
   return function commandHandler (aggregateId, aggregate, command, metadata, create) {
+    console.log("AGGREGATEID");
+    console.log(aggregateId);
+    console.log("AGGREGATEID");
+    console.log(aggregate);
     if (!create && typeof metadata === 'boolean') {
       create = metadata;
       metadata = null;
@@ -21,14 +25,27 @@ module.exports = function commandHandlerFactory (esConnection, logger) {
           return readResult.events.length;
         })
         .then(function (expectedVersion) {
-          return {
-            event: aggregate.execute(command),
-            expectedVersion: expectedVersion - 1
-          };
+            var events = aggregate.execute(command);
+            var eventList = [];
+            for(var i=0; i < events.length; i++) {
+              //TODO: expectedVersion needs testing/code review.
+              var evt = {
+                event: esClient.createJsonEventData(uuid.v4(), events[i], metadata),
+                expectedVersion: expectedVersion - 1
+              };
+              eventList.push(evt);
+            };
+          return eventList;
         })
         .then(function (data) {
-          var event = esClient.createJsonEventData(uuid.v4(), data.event, metadata);
-          return esConnection.appendToStream(streamName, data.expectedVersion, [event]);
+          var eventList = [];
+          var expectedVersion = null;
+          for(var i=0; i < data.length; i++) {
+            expectedVersion = data[i].expectedVersion;
+            eventList.push(data[i].event);
+          };
+          console.log(eventList);
+          return esConnection.appendToStream(streamName, expectedVersion, eventList);
         })
         .then(function (result) {
           logger.info('Processing command', utils.getTypeName(command), JSON.stringify(command), "create="+create, 'took', Date.now()-start, 'ms');

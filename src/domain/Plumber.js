@@ -15,9 +15,7 @@ export default class Plumber {
     this._overtimeRate = null;
   }
 
-  hydrate(events) {
-    for (var index = 0; index < events.length; ++index) {
-      var evt = events[index];
+  hydrate(evt) {
       if (evt instanceof PlumberIsAvailable) {
         this._onPlumberIsAvailable(evt);
       } 
@@ -27,7 +25,6 @@ export default class Plumber {
       if (evt instanceof RateChanged) {
         this._onRateChanged(evt);
       }
-    };
   }
 
   _onPlumberCreated(evt) {
