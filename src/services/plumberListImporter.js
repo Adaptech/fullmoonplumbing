@@ -5,7 +5,7 @@ var request = require("request");
 var esConnection = esClient.createConnection({}, {"hostname": "localhost", "port": 1113});
 esConnection.connect();
 esConnection.once('connected', function (tcpEndPoint) {
-    console.log('Connected to eventstore at ' + tcpEndPoint.hostname + ":" + tcpEndPoint.port);
+    // console.log('Connected to eventstore at ' + tcpEndPoint.hostname + ":" + tcpEndPoint.port);
 
     // GET events from Google Sheet:
     var options = { method: 'GET',
@@ -34,7 +34,7 @@ esConnection.once('connected', function (tcpEndPoint) {
 
           // Store events in Eventstore:
           var streamName = "legacy" + "-" + aggregateType + "-" + aggregateId;
-          console.log("Storing " + eventType + " event " + eventId + ". Look for it at: http://localhost:2113/web/index.html#/streams/" + streamName);          
+          // console.log("Storing " + eventType + " event " + eventId + ". Look for it at: http://localhost:2113/web/index.html#/streams/" + streamName);          
           var eventData = {
               "eventType": eventType,
               "property": property,
@@ -51,7 +51,7 @@ esConnection.once('connected', function (tcpEndPoint) {
                   ;
               })
               .catch(function(err) {
-                  console.log(err);
+                  // console.log(err);
               });
       } // endfor
     });
