@@ -1,15 +1,21 @@
 {
   "name": "fullmoonplumbing",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Opensource scheduler for plumbing businesses",
-  "main": "dist/scheduler/plumberListImporter.js",
+  "main": "dist/app.js",
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
     "eventstore-node": "latest",
-    "request": "latest",
+    "express": "^4.13.4",
+    "glob": "^7.0.5",
     "nodeunit": "latest",
-    "uuid": "latest",
-    "es6-promise": "^4.0.5",
-    "isomorphic-fetch": "^2.2.1"  
+    "on-response": "^1.0.1",
+    "uuid": "latest"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.13.2"
   },
   "scripts": {
     "clean": "rm -rf dist",
