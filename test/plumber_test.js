@@ -65,7 +65,10 @@ module.exports = {
     var plumber = new Plumber();
     var previousEvents = plumber.execute(new CreatePlumber("134564","Mike", "Edmunds", 80.0, 100.0));
     var updatedPlumber = new Plumber();
-    updatedPlumber.hydrate(previousEvents);
+    for (var index = 0; index < previousEvents.length; ++index) {
+      var evt = previousEvents[index];
+      updatedPlumber.hydrate(evt);
+    }
 
     // When:
     var result = updatedPlumber.execute(new UpdatePlumber("134564","Joe", "Edmunds", 80.0, 100.0));
@@ -80,8 +83,10 @@ module.exports = {
     var plumber = new Plumber();
     var previousEvents = plumber.execute(new CreatePlumber("134564","Mike", "Edmunds", 80.0, 100.0));
     var updatedPlumber = new Plumber();
-    updatedPlumber.hydrate(previousEvents);
-
+    for (var index = 0; index < previousEvents.length; ++index) {
+      var evt = previousEvents[index];   
+      updatedPlumber.hydrate(evt);
+    }
     // When:
     var result = updatedPlumber.execute(new UpdatePlumber("134564","Mike", "Edmundson", 80.0, 100.0));
 
@@ -96,7 +101,10 @@ module.exports = {
     var plumber = new Plumber();
     var previousEvents = plumber.execute(new CreatePlumber("134564","Mike", "Edmunds", 80.0, 100.0));
     var updatedPlumber = new Plumber();
-    updatedPlumber.hydrate(previousEvents);
+    for (var index = 0; index < previousEvents.length; ++index) {
+      var evt = previousEvents[index];    
+      updatedPlumber.hydrate(evt);
+    }
 
     // When:
     var result = updatedPlumber.execute(new UpdatePlumber("134564","Mike", "Edmundson", 80.0, 100.0));
@@ -111,7 +119,10 @@ module.exports = {
     var plumber = new Plumber();
     var previousEvents = plumber.execute(new CreatePlumber("134564","Mike", "Edmunds", 80.0, 100.0));
     var updatedPlumber = new Plumber();
-    updatedPlumber.hydrate(previousEvents);
+    for (var index = 0; index < previousEvents.length; ++index) {
+      var evt = previousEvents[index];    
+      updatedPlumber.hydrate(evt);
+    }
 
     // When:
     var result = updatedPlumber.execute(new UpdatePlumber("134564","Mike", "Edmundson", 85.0, 100.0));
@@ -128,7 +139,10 @@ module.exports = {
     var plumber = new Plumber();
     var previousEvents = plumber.execute(new CreatePlumber("134564","Mike", "Edmunds", 80.0, 100.0));
     var updatedPlumber = new Plumber();
-    updatedPlumber.hydrate(previousEvents);
+    for (var index = 0; index < previousEvents.length; ++index) {
+      var evt = previousEvents[index];    
+      updatedPlumber.hydrate(evt);
+    }
 
     // When:
     var result = updatedPlumber.execute(new UpdatePlumber("134564","Mike", "Edmundson", 80.0, 120.0));
@@ -155,7 +169,10 @@ module.exports = {
     var plumber = new Plumber();
     var previousEvents = plumber.execute(new CreatePlumber("134564","Mike", "Edmunds", 80.0, 100.0));
     var updatedPlumber = new Plumber();
-    updatedPlumber.hydrate(previousEvents);
+    for (var index = 0; index < previousEvents.length; ++index) {
+      var evt = previousEvents[index];    
+      updatedPlumber.hydrate(evt);
+    }
 
     // When:
     var result = updatedPlumber.execute(new UpdatePlumber("134564","Mike", "Edmunds", 0.0, 0.0));

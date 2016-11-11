@@ -60,6 +60,7 @@ function ReadRepository(esConnection, logger) {
   esConnection.subscribeToAllFrom(null, true,
     function (s, evData) {
       logger.info('Processing event', evData.originalEvent.eventType);
+      // console.log(evData);
       try {
         var eventData = {
           typeId: evData.originalEvent.eventType,
@@ -86,7 +87,7 @@ function ReadRepository(esConnection, logger) {
     if (!model) {
       throw new Error('model parameter is missing.');
     }
-    console.log(model);
+    // console.log(model);
     if (!model.reducer || !model.filters) {
       throw new TypeError('model MUST have reducer and filters properties.');
     }
