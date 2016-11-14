@@ -44,7 +44,6 @@ module.exports = function commandHandlerFactory (esConnection, logger) {
             expectedVersion = data[i].expectedVersion;
             eventList.push(data[i].event);
           };
-          console.log(eventList);
           return esConnection.appendToStream(streamName, expectedVersion, eventList);
         })
         .then(function (result) {

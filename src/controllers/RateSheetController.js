@@ -4,8 +4,6 @@ export default class RateSheetController {
     function getRateSheet(req, res) {
       readRepository.findAll('ratesheet')
           .then(results => {
-            console.log("RATESHEET RESULTS");
-            console.log(results);
             res.json(results);
           })
           .catch(err => {

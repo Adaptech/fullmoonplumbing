@@ -19,9 +19,9 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "babel src --out-dir dist",
+    "build": "babel src --out-dir dist --source-maps",
     "prestart": "npm run clean && npm run build",
-    "start": "babel-node src/app local",
+    "start": "babel-node --presets es2015 src/app local",
     "pretest": "npm run build",
     "test": "nodeunit"
   },
