@@ -38,3 +38,6 @@ jspm_packages
 jsconfig.json
 .vscode
 dist
+typings
+typings.json
+

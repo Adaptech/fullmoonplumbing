@@ -9,9 +9,9 @@ appointment was important, but the core domain (the part which Full Moon Plumbin
 
 As usual in the first session, we did an introduction to event sourcing, CQRS and domain driven design followed by an event storming:
 
-Higher-res image: https://raw.githubusercontent.com/Adaptech/fullmoonplumbing/master/FullMoonPlumbingEventStorm.png
+Higher-res image: https://raw.githubusercontent.com/Adaptech/fullmoonplumbing/master/FullMoonPlumbingLegacy.jpg
 
-![Full Moon Plumbing Eventstorm](FullMoonPlumbingEventStorm.png)
+![Full Moon Plumbing Eventstorm](FullMoonPlumbingLegacy.jpg)
 
 (About the Aggregator pattern used in the context map: http://www.enterpriseintegrationpatterns.com/patterns/messaging/Aggregator.html )
 
