@@ -4,10 +4,6 @@ var esClient = require('eventstore-node');
 
 module.exports = function commandHandlerFactory (esConnection, logger) {
   return function commandHandler (aggregateId, aggregate, command, metadata, create) {
-    console.log("AGGREGATEID");
-    console.log(aggregateId);
-    console.log("AGGREGATEID");
-    console.log(aggregate);
     if (!create && typeof metadata === 'boolean') {
       create = metadata;
       metadata = null;
@@ -44,7 +40,6 @@ module.exports = function commandHandlerFactory (esConnection, logger) {
             expectedVersion = data[i].expectedVersion;
             eventList.push(data[i].event);
           };
-          console.log(eventList);
           return esConnection.appendToStream(streamName, expectedVersion, eventList);
         })
         .then(function (result) {

@@ -2,7 +2,7 @@ var Plumber = require('../dist/domain/Plumber').default;
 var CreatePlumber = require('../dist/commands/CreatePlumber').default;
 var UpdatePlumber = require('../dist/commands/UpdatePlumber').default;
 
-var PlumberCreated = require('../dist/events/PlumberCreated').default;
+var PlumberHired = require('../dist/events/PlumberHired').default;
 var PlumberUpdated = require('../dist/events/PlumberUpdated').default;
 var RateChanged = require('../dist/events/RateChanged').default;
 
@@ -15,7 +15,7 @@ module.exports = {
     var plumber = new Plumber();
     var result = plumber.execute(new CreatePlumber("134564","Mike", "Edmunds", null, null));
     test.ok(result.length == 1)
-    test.ok(result[0] instanceof PlumberCreated);
+    test.ok(result[0] instanceof PlumberHired);
     test.equal(result[0].plumberId, "134564");
     test.equal(result[0].firstName, "Mike");
     test.equal(result[0].lastName, "Edmunds");
@@ -25,7 +25,7 @@ module.exports = {
     var plumber = new Plumber();
     var result = plumber.execute(new CreatePlumber("134564","Mike", "Edmunds", 80.0, 100.0));
     test.ok(result.length == 2)
-    test.ok(result[0] instanceof PlumberCreated);
+    test.ok(result[0] instanceof PlumberHired);
     test.equal(result[0].plumberId, "134564");
     test.equal(result[0].firstName, "Mike");
     test.equal(result[0].lastName, "Edmunds");
@@ -40,14 +40,14 @@ module.exports = {
     var plumber = new Plumber();
     var result = plumber.execute(new CreatePlumber("134564","Mike", "Edmunds", -5, 100.0));
     test.ok(result.length == 1)
-    test.ok(result[0] instanceof PlumberCreated);
+    test.ok(result[0] instanceof PlumberHired);
     test.done();
   },  
   'Test Create Plumber with negative overtime rate': function (test) {
     var plumber = new Plumber();
     var result = plumber.execute(new CreatePlumber("134564","Mike", "Edmunds", 50.00, -100.0));
     test.ok(result.length == 1)
-    test.ok(result[0] instanceof PlumberCreated);
+    test.ok(result[0] instanceof PlumberHired);
     test.done();
   },  
   'Test Create Plumber mandatory firstname': function (test) {

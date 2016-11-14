@@ -2,7 +2,7 @@ import CreatePlumber from '../commands/CreatePlumber';
 import UpdatePlumber from '../commands/UpdatePlumber';
 
 // Events:
-import PlumberCreated from '../events/PlumberCreated';
+import PlumberHired from '../events/PlumberHired';
 import PlumberUpdated from '../events/PlumberUpdated';
 import RateChanged from '../events/RateChanged';
 import PlumberIsAvailable from '../events/PlumberIsAvailable';
@@ -19,7 +19,7 @@ export default class Plumber {
       if (evt instanceof PlumberIsAvailable) {
         this._onPlumberIsAvailable(evt);
       } 
-      if (evt instanceof PlumberCreated) {
+      if (evt instanceof PlumberHired) {
         this._onPlumberCreated(evt);
       }
       if (evt instanceof RateChanged) {
@@ -63,7 +63,7 @@ export default class Plumber {
     }
 
     var result = [];
-    result.push(new PlumberCreated(command.plumberId, command.firstName, command.lastName));
+    result.push(new PlumberHired(command.plumberId, command.firstName, command.lastName));
 
     if(command.regularRate && command.overtimeRate){
         if(command.regularRate > 0.0 && command.overtimeRate > 0.0) {
