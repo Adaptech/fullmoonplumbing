@@ -40,4 +40,5 @@ jsconfig.json
 dist
 typings
 typings.json
+.eslintrc.json
 
