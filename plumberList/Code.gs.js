@@ -66,7 +66,6 @@ function onEdit(e){
           var eventType = aggregateType + "Updated";
         } // endif
         Logger.log("eventType: " + eventType);
-        //TODO: How can we detect deletion events?
             
         // Log event:
         var eventId = Utilities.getUuid();

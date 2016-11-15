@@ -1,3 +1,7 @@
+//TODO: Write tests for the "UpdatePlumber" command on the plumber aggregate and make them pass. 
+//      It should result in a "PlumberUpdated" event if the first- and/or lastname changed. 
+//      Also, it should result in a "RateChanged" event if the regular- or overtime rates changed.
+
 var Plumber = require('../dist/domain/Plumber').default;
 var CreatePlumber = require('../dist/commands/CreatePlumber').default;
 var UpdatePlumber = require('../dist/commands/UpdatePlumber').default;
@@ -33,16 +37,6 @@ module.exports = {
     test.ok(result[0] instanceof PlumberHired);
     test.done();
   },  
-  'Test Create Plumber mandatory firstname': function (test) {
-    var plumber = new Plumber();
-    test.throws( function() { plumber.execute(new CreatePlumber("134564",null, "Smith", 80.0, 100.0)), PlumberRequiredFieldError } ); 
-    test.done();
-  },
-  'Test Create Plumber mandatory lastName': function (test) {
-    var plumber = new Plumber();
-    test.throws( function() { plumber.execute(new CreatePlumber("134564","Joe", null, 80.0, 100.0)), PlumberRequiredFieldError } ); 
-    test.done();
-  },
   'Test Update Plumber - PlumberUpdate event happens upon firstname change.': function (test) {
     // Given:
     var plumber = new Plumber();

@@ -1,3 +1,7 @@
+//TODO: Write tests for "PlumberUpdated" and "RateChanged" events and make them pass.
+
+var PlumberUpdated = require('../dist/events/PlumberUpdated').default;
+var RateChanged = require('../dist/events/RateChanged').default;
 var Plumber = require('../dist/domain/Plumber').default;
 var ratesheet = require('../dist/readModels/ratesheet');
 var CreatePlumber = require('../dist/commands/CreatePlumber').default;

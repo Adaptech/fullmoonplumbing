@@ -61,9 +61,16 @@ export default class Plumber {
   }
 
   _updatePlumber(command) {
-    validate(command);    
+    if(!command.firstName) {
+      throw new PlumberRequiredFieldError('Required field: Firstname missing.')
+    }
+    if(!command.lastName) {
+      throw new PlumberRequiredFieldError('Required field: Lastname missing.')
+    }
+    if(command.regularRate <= 0.0 || command.overtimeRate <= 0.0) {
+      throw new PlumberInvalidFieldValueError('Rates must be greater than zero.')
+    }    
     var result = [];
-    //TODO: Only publish a PlumberUpdated event if the first- or lastname actually changed.
     result.push(new PlumberUpdated(command.plumberId, command.firstName, command.lastName));
 
     if(this._regularRate !== command.regularRate || this._overtimeRate !== command.overtimeRate) {
@@ -72,18 +79,6 @@ export default class Plumber {
     return result;
   }
 };
-
-function validate(command) {
-  if(!command.firstName) {
-    throw new PlumberRequiredFieldError('Required field: Firstname missing.')
-  }
-  if(!command.lastName) {
-    throw new PlumberRequiredFieldError('Required field: Lastname missing.')
-  }
-  if(command.regularRate <= 0.0 || command.overtimeRate <= 0.0) {
-    throw new PlumberInvalidFieldValueError('Rates must be greater than zero.')
-  }
-}
 
 function PlumberRequiredFieldError(message) {
   this.name = "PlumberRequiredFieldError";
