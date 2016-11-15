@@ -12,7 +12,7 @@ module.exports = {
 
     // When sending previous events to the rates sheet builder read model:
     var result = [];
-    for(i=0; i < previousEvents.length; i++) {
+    for(var i=0; i < previousEvents.length; i++) {
       var eventData = {
         typeId: previousEvents[i].constructor.name,
         event: previousEvents[i],
@@ -26,7 +26,6 @@ module.exports = {
     test.equal(result[0].name, 'Edmunds, Mike');
     test.equal(result[0].regularRate, 80.0);
     test.equal(result[0].overtimeRate, 100.0);
-    test.equal(result[0].canBeScheduled, true);
     test.done();
   }      
 };

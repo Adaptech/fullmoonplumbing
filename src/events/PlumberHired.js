@@ -1,7 +1,9 @@
 export default class PlumberHired {
-  constructor(plumberId, firstName, lastName) {
+  constructor(plumberId, firstName, lastName, regularRate, overtimeRate) {
     this.plumberId = plumberId;
     this.firstName = firstName;
     this.lastName = lastName;
+    this.regularRate = regularRate;
+    this.overtimeRate = overtimeRate;
   }
 };

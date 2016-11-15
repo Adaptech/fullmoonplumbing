@@ -1,5 +1,5 @@
 export const filters = {
-  eventType: ['PlumberHired', 'PlumberIsAvailable']
+  eventType: ['PlumberHired', 'MadeAvailableForScheduling']
 };
 
 export function reducer(ratesSheet, eventData) {
@@ -8,16 +8,16 @@ export function reducer(ratesSheet, eventData) {
     case 'PlumberHired':
       ratesSheet.push({
         plumberId: event.plumberId,
-        name: event.lastName + ", " + event.firstName
+        name: event.lastName + ", " + event.firstName,
+        regularRate : event.regularRate,
+        overtimeRate : event.overtimeRate
       });
       break;
-    case 'PlumberIsAvailable':
+    case 'RateChanged':
       const plumber = ratesSheet.filter(ratesSheetEntry => ratesSheetEntry.plumberId === event.plumberId );
       plumber[0].regularRate =  event.regularRate;
       plumber[0].overtimeRate =  event.overtimeRate;
-      plumber[0].canBeScheduled = true;
       break;
-    //TODO: Handle 'RateChanged' events. 
     //TODO: Handle 'PlumberUpdated' events.
   }
   return ratesSheet;

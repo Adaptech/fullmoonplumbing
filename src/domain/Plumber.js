@@ -5,8 +5,7 @@ import UpdatePlumber from '../commands/UpdatePlumber';
 import PlumberHired from '../events/PlumberHired';
 import PlumberUpdated from '../events/PlumberUpdated';
 import RateChanged from '../events/RateChanged';
-import PlumberIsAvailable from '../events/PlumberIsAvailable';
-import PlumberIsUnavailable from '../events/PlumberIsUnavailable';
+import MadeAvailableForScheduling from '../events/MadeAvailableForScheduling';
 
 export default class Plumber {
   constructor() {
@@ -16,20 +15,21 @@ export default class Plumber {
   }
 
   hydrate(evt) {
-      if (evt instanceof PlumberIsAvailable) {
+      if (evt instanceof MadeAvailableForScheduling) {
         this._onPlumberIsAvailable(evt);
       } 
       if (evt instanceof PlumberHired) {
-        this._onPlumberCreated(evt);
+        this._onPlumberHired(evt);
       }
       if (evt instanceof RateChanged) {
         this._onRateChanged(evt);
       }
   }
 
-  _onPlumberCreated(evt) {
+  _onPlumberHired(evt) {
     this._id = evt.plumberId;
-  }
+    this._regularRate = evt.regularRate;
+    this._overtimeRate = evt.overtimeRate;  }
 
   _onRateChanged(evt) {
     this._regularRate = evt.regularRate;
@@ -37,8 +37,7 @@ export default class Plumber {
   }
 
   _onPlumberIsAvailable(evt) {
-    this._regularRate = evt.regularRate;
-    this._overtimeRate = evt.overtimeRate;
+    //TODO: Implement.
   }
 
   execute(command) {
@@ -55,32 +54,14 @@ export default class Plumber {
     if (this._id) {
       throw new Error('Plumber already exists.');
     }
-    if(!command.firstName) {
-      throw new PlumberRequiredFieldError('Required field: Firstname missing.')
-    }
-    if(!command.lastName) {
-      throw new PlumberRequiredFieldError('Required field: Lastname missing.')
-    }
-
+    // validate(command);
     var result = [];
-    result.push(new PlumberHired(command.plumberId, command.firstName, command.lastName));
-
-    if(command.regularRate && command.overtimeRate){
-        if(command.regularRate > 0.0 && command.overtimeRate > 0.0) {
-          result.push(new PlumberIsAvailable(command.plumberId, command.regularRate, command.overtimeRate));      
-        }
-    } 
+    result.push(new PlumberHired(command.plumberId, command.firstName, command.lastName, command.regularRate, command.overtimeRate));
     return result;
   }
 
   _updatePlumber(command) {
-    if(!command.firstName) {
-      throw new PlumberRequiredFieldError('Required field: Firstname missing.')
-    }
-    if(!command.lastName) {
-      throw new PlumberRequiredFieldError('Required field: Lastname missing.')
-    }
-
+    validate(command);    
     var result = [];
     //TODO: Only publish a PlumberUpdated event if the first- or lastname actually changed.
     result.push(new PlumberUpdated(command.plumberId, command.firstName, command.lastName));
@@ -88,16 +69,30 @@ export default class Plumber {
     if(this._regularRate !== command.regularRate || this._overtimeRate !== command.overtimeRate) {
       result.push(new RateChanged(this._id, command.regularRate, command.overtimeRate));
     }
-
-    if(command.regularRate === 0.0 || command.overtimeRate === 0.0) {
-      result.push(new PlumberIsUnavailable(this._id, "Missing rate."));
-    }
     return result;
   }
 };
+
+function validate(command) {
+  if(!command.firstName) {
+    throw new PlumberRequiredFieldError('Required field: Firstname missing.')
+  }
+  if(!command.lastName) {
+    throw new PlumberRequiredFieldError('Required field: Lastname missing.')
+  }
+  if(command.regularRate <= 0.0 || command.overtimeRate <= 0.0) {
+    throw new PlumberInvalidFieldValueError('Rates must be greater than zero.')
+  }
+}
 
 function PlumberRequiredFieldError(message) {
   this.name = "PlumberRequiredFieldError";
   this.message = (message || "");
 }
 PlumberRequiredFieldError.prototype = Error.prototype;
+
+function PlumberInvalidFieldValueError(message) {
+  this.name = "PlumberInvalidFieldValueError";
+  this.message = (message || "");
+}
+PlumberInvalidFieldValueError.prototype = Error.prototype;
