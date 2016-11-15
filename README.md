@@ -15,7 +15,47 @@ Higher-res image: https://raw.githubusercontent.com/Adaptech/fullmoonplumbing/ma
 
 (About the Aggregator pattern used in the context map: http://www.enterpriseintegrationpatterns.com/patterns/messaging/Aggregator.html )
 
-## Eventsourcing: How About Some Spreadsheets?
+## Getting Started
+
+### Install & run Eventstore on localhost
+
+See http://docs.geteventstore.com/introduction/3.9.0/ . 
+
+### Install modules
+
+`npm install`
+
+### Run the tests
+
+`npm test`
+
+### Start app
+
+`npm start`
+
+## Using the API
+
+Create a plumber:
+
+``` curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d '{
+    "firstName": "Joe",
+    "lastName": "Peters",
+    "regularRate": 100.00,
+    "overtimeRate": 150.00
+}
+
+' "http://localhost:8080/api/v1/plumber/create"
+```
+
+Get the rates sheet:
+
+```
+curl -X GET -H "Content-Type: application/json" -H "Cache-Control: no-cache" "http://localhost:8080/api/v1/ratesheets"
+```
+
+## Optional: Install the "Legacy System Simulator" Google Sheet 
+
+> Eventsourcing: How About Some Spreadsheets?
 
 The Plumber List "legacy system" is done in Google Sheets, including the API which makes "PlumberCreated" and "PlumberUpdated" events
 available to the Full Moon Plumbing scheduling service. 

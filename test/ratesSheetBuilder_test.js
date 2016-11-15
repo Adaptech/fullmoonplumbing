@@ -1,5 +1,3 @@
-var PlumberHired = require('../dist/events/PlumberHired').default;
-var RateChanged = require('../dist/events/RateChanged').default;
 var Plumber = require('../dist/domain/Plumber').default;
 var ratesheet = require('../dist/readModels/ratesheet');
 var CreatePlumber = require('../dist/commands/CreatePlumber').default;
